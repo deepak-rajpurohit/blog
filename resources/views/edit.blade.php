@@ -22,28 +22,34 @@
                 </div>
                 <div class="card-body">
                     <div class="pt-1">
-                        <form action="add" enctype="multipart/form-data" method="post">
+                        <form action="{{ route('update',$data->id) }}" enctype="multipart/form-data" method="post">
+                            @method('PUT')
                             @csrf
                             <div class="form-group ">
-                                <input type="text" name="title" id="title" class="form-control" placeholder="Enter title">
+                                <input type="text" name="title" value="{{ $data->title }}" id="title" class="form-control" placeholder="Enter title">
                                     <span style="color: red">@error('title'){{ $message }}@enderror</span>
                             </div>
                             <div class="form-group mt-1">
-                                <textarea name="description" id="discription" class="form-control" cols="30" rows="10" placeholder="Write your blog here"></textarea>
+                                <textarea name="description" value="{{ $data->description }}" id="discription" class="form-control" cols="30" rows="10" placeholder="Write your blog here">@isset($data){{$data->description}}@else @endIf</textarea>
                                 <span style="color: red">@error('descripton'){{ $message }}@enderror</span>
                               {{-- <input type="text" name="description" id="description" class="form-control" placeholder="Enter description"> --}}
                             </div>
                             <div class="form-group mt-1">
-                                <input type="text" name="author" id="author" class="form-control" placeholder="Enter author name">
+                                <input type="text" name="author" value="{{ $data->author }}" id="author" class="form-control" placeholder="Enter author name">
                                 <span style="color: red">@error('author'){{ $message }}@enderror</span>
                             </div>
                             <div class="form-group mt-1">
-                                <input type="file" name="file" id="file" class="form-control" >
+                                <img src="{{ Storage::url("images/".$data->path) }}" alt="" width="50"/>
+                                <label for="file"> Upload File: ({{ $data->path }})</label>
+                                <input type="file" name="file" value="Upload"  id="file" class="form-control" >
                                 <span style="color: red">@error('file'){{ $message }}@enderror</span>
                             </div>
                             <div class=" mt-2">
-                                <button class="btn btn-secondary">Submit</button>
+                                <button type="submit" class="btn btn-secondary">Update</button>
+                                {{-- <a href="{{ route('list') }}" class="btn btn-secondary m-3">Update</a> --}}
+                                <a href="{{ route('list') }}" class="btn btn-warning" hr>cancel</a>
                             </div>
+
                         </form>
                     </div>
                 </div>

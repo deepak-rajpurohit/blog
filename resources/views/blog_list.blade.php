@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Blog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -17,9 +17,9 @@
                 </div>
             </div>
             @foreach ($blogs as $blog)
-            
-            <div class="col-4 mb-3">
-                <div class="card">
+
+            <div class="col-6 mb-3 w-25 p-3">
+                <div class="card text-white bg-dark border-warning" style="left: 100%">
                     <div class="card-header">
                         <img src="{{ Storage::disk("public")->url("images/$blog->path") }}" class="img-fluid" alt="{{ $blog->author }}">
                     </div>
@@ -32,12 +32,12 @@
                         </div>
                     </div>
                     <div class='card-footer d-flex justify-content-between'>
-                        <div class="btn btn-primary">
+                        <a href="{{ route('edit', $blog->id) }}" class="btn btn-primary">
                             edit
-                        </div>
-                        <div class="btn btn-danger">
+                        </a>
+                        <a href="{{ route('delete', $blog->id) }}" class="btn btn-danger">
                             Delete
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
